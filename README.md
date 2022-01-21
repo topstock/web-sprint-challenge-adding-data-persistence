@@ -41,28 +41,28 @@ Add `"start"`. `"server"`, `"migrate"` and `"rollback"` scripts to the `package.
 
 Build the migration(s) in Knex inside the `data/migrations` folder using appropriate data types and constraints. **You must use the table names and the column names described below.** To give a primary key a name different than `id`, do `table.increments("project_id")` instead of `table.increments()`.
 
-- [ ] A **project** is what needs to be done and is stored in a `projects` table with the following columns:
+- [X] A **project** is what needs to be done and is stored in a `projects` table with the following columns:
 
-  - [ ] `project_id` - primary key
-  - [ ] `project_name` - required
-  - [ ] `project_description` - optional
-  - [ ] `project_completed` - the database defaults it to `false` (integer 0) if not provided
+  - [X] `project_id` - primary key
+  - [X] `project_name` - required
+  - [X] `project_description` - optional
+  - [X] `project_completed` - the database defaults it to `false` (integer 0) if not provided
 
-- [ ] A **resource** is anything needed to complete a project and is stored in a `resources` table with the following columns:
+- [X] A **resource** is anything needed to complete a project and is stored in a `resources` table with the following columns:
 
-  - [ ] `resource_id` - primary key
-  - [ ] `resource_name` - required and unique
-  - [ ] `resource_description` - optional
+  - [X] `resource_id` - primary key
+  - [X] `resource_name` - required and unique
+  - [X] `resource_description` - optional
 
-- [ ] A **task** is one of the steps needed to complete a project and is stored in a `tasks` table with the following columns:
+- [X] A **task** is one of the steps needed to complete a project and is stored in a `tasks` table with the following columns:
 
-  - [ ] `task_id` - primary key
-  - [ ] `task_description` - required
-  - [ ] `task_notes` - optional
-  - [ ] `task_completed` - the database defaults it to `false` (integer 0) if not provided
-  - [ ] `project_id` - required and points to an actual `project_id` in the `projects` table
+  - [X] `task_id` - primary key
+  - [X] `task_description` - required
+  - [X] `task_notes` - optional
+  - [X] `task_completed` - the database defaults it to `false` (integer 0) if not provided
+  - [X] `project_id` - required and points to an actual `project_id` in the `projects` table
 
-- [ ] A **resource assignment** connects a resource and a project, and is stored in a `project_resources` table. You decide what columns to use.
+- [X] A **resource assignment** connects a resource and a project, and is stored in a `project_resources` table. You decide what columns to use.
 
 ### Required Endpoints
 
@@ -111,6 +111,17 @@ Build an API inside the `api` folder with endpoints for:
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. Explain the difference between Relational Databases and SQL.
+ 
+Answer: SQL the most common Relational Database language.  A Relational Database is a type of database, whereas SQL is the syntax, keywords and other language features used to build that kind of database.
+ 
 2. Why do tables need a Primary Key?
+
+Answer: A Primary Key protects the database's ability to link and reference rows between tables, ease distinction of similar records, reduce error risk and convoluted methods, and track those records.  Without the primary key, whatever identifying information used could be updated or deleted making references and junctions incorrect or at least greatly multiplying the processes required to maintain the relationships. The primary key creates a uniform system with much less room for error.     
+ 
 3. What is the name given to a table column that references the Primary Key on another table?
+
+Answer:  A foreign key is a column that references the primary key of another table.  The column that references the other table’s primary key is named otherTableName_id, where the otherTableName is that other table’s name.
+ 
 4. What do we need in order to have a _many to many_ relationship between two tables?
+
+	Answer:  A junction table is used to create a many to many relationship between two tables.  It includes its own primary key and two foreign keys each singly referencing the corresponding the original table’s primary key.
