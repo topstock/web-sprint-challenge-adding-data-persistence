@@ -1,17 +1,22 @@
 // build your `Project` model here
 const db = require('../../data/dbConfig')
+async function create(newProject) {
+  const {project_name, project_description, project_completed} = newProject
+  const newIds = await db('projects')
+    .insert({
+        project_name: project_name,
+        project_description: project_description,
+        project_completed: project_completed
 
-function find() {
-  return db('projects as p')
-    .join('resources as r', 'p.project_id', 'r.project_id')
-    .join('tasks as ta', 'p.project_id', 'ta.project_id')
-}
+      })
 
-async function findById() {
+    return db('projects').where('project_id', newIds[0]).first()
     
 }
-
+function find() {
+    return db('projects')
+}
 module.exports = {
-    find,
-    findById
+    create,
+    find
 }
