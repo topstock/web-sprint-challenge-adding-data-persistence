@@ -1,20 +1,22 @@
 // build your `Task` model here
 const db = require('../../data/dbConfig')
-function create(newTask) {
-    const {task_name, task_description} = newTask
-    return db('tasks')
-      .insert({
-          task_name: task_name,
-          task_description: task_description || null
-        })
-      .then( function (result) {
-        const newId = result[0]
-        db('tasks').where('task_id', newId).first()
+async function create(newTask) {
+  const { task_description, task_notes, task_completed, project_id } = newTask
+  const newIds = await db('tasks')
+    .insert({
+        task_description: task_description,
+        task_notes: task_notes,
+        task_completed: task_completed,
+        project_id: project_id,
       })
+
+  return db('tasks').where('task_id', newIds[0]).first()
 }
+
 function find() {
     return db('tasks')
 }
+
 module.exports = {
     create,
     find

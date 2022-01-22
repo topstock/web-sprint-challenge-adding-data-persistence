@@ -19,6 +19,7 @@ router.post('/', async (req, res, next) => {
     }
     const addedProject = await Project.create(newProject)
     try {
+      addedProject.project_completed = !(!addedProject.project_completed)
       res.status(200).json(addedProject)
     } catch(err) {
       next(err)
@@ -28,10 +29,15 @@ router.post('/', async (req, res, next) => {
 router.get('/', async (req, res, next) => {
     const projects = await Project.find()
     try {
-        res.status(200).json(projects)
+        booleanHavingProjects = projects.map(project => {
+            return { ...project, project_completed: !(!project.project_completed)}
+        })
+        res.status(200).json(booleanHavingProjects)
     } catch(err) {
         next(err)
     }
 })
 
 module.exports = router
+
+//example:  http :5000/api/projects project_name="stacking things"

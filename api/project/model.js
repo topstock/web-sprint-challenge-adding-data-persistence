@@ -7,7 +7,6 @@ async function create(newProject) {
         project_name: project_name,
         project_description: project_description,
         project_completed: project_completed
-
       })
 
     return db('projects').where('project_id', newIds[0]).first()
