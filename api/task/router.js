@@ -26,7 +26,7 @@ router.get('/', async (req, res, next) => {
     const tasks = await Task.find()
     try {
         booleanHavingTasks = tasks.map(task => {
-            return { ...task, task_completed: !(!addedTask.task_completed)}
+            return { ...task, task_completed: !(!task.task_completed)}
         })
         res.status(200).json(booleanHavingTasks)
     } catch(err) {
